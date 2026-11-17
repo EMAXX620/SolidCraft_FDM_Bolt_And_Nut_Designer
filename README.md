@@ -1,24 +1,21 @@
-# SolidCraft_FDM_Bolt_Designer
-Create 3D printable bolts with a variety of head types and sizes.
-
-
-FDM BOLT DESIGNER PLUGIN FOR SOLIDCRAFT
-Version 1.4.0
+FDM BOLT & NUT DESIGNER PLUGIN FOR SOLIDCRAFT
+Version 2.0.0
 ======================================================================
 
-<img width="886" height="763" alt="image" src="https://github.com/user-attachments/assets/9c2964e3-3c74-4d17-b3a5-92324e0dc3ef" />
+<img width="1027" height="975" alt="image" src="https://github.com/user-attachments/assets/1542c28e-914d-47e0-95d9-59aca2a1f9d0" />
 
 
 WHAT IT IS
 ----------
 A companion to the FDM 90° Threads plugin. Instead of threading a shaft
-you've already drawn, it makes a whole bolt from scratch, as a new part,
-ready to print:
+you've already drawn, it makes whole bolts and nuts from scratch, as new
+parts, ready to print:
 
   - The same FDM-friendly threads as FDM 90° Threads: 45° sides, wide
-    flat tops and bottoms, and a clearance you choose. Bolts from this
-    plugin screw into nuts and holes made with FDM 90° Threads (or the
-    Fusion 360 "FDM90" threads) when you use the same size and clearance.
+    flat tops and bottoms, and a clearance you choose. Its bolts and
+    nuts fit each other, and nuts and holes made with FDM 90° Threads
+    (or the Fusion 360 "FDM90" threads), when you use the same size and
+    clearance.
   - A head of your choice, each with its own button:
       FDM Hex Bolt       - a hex head, for a wrench
       FDM Socket Bolt    - a round head with a hex key hole, like a socket
@@ -27,6 +24,7 @@ ready to print:
       FDM Slotted Bolt   - a round head with a slot for a flat screwdriver
     Each button's window only shows the settings for that head.
     (For a plain threaded rod, use FDM Rod in FDM 90° Threads.)
+  - FDM Nut makes a hex nut, with its own button.
   - Round heads can be flat-topped or countersunk (a 90° cone that sits
     flush in a countersunk hole).
   - You set the head's size and thickness, or leave them empty and the
@@ -36,7 +34,7 @@ ready to print:
 WHAT YOU NEED
 -------------
   - SolidCraft (the desktop version).
-  - The file fdm-bolt-designer.zip. This is the plugin. Don't unzip it;
+  - The file fdm-bolt-nut-designer.zip. This is the plugin. Don't unzip it;
     SolidCraft installs the zip directly.
 
 You don't need FDM 90° Threads installed to use this plugin; they work
@@ -47,16 +45,21 @@ HOW TO INSTALL
 --------------
   1. Open SolidCraft.
   2. Go to Preferences > Plugins.
-  3. Click "Install plugin..." and choose fdm-bolt-designer.zip.
+  3. Click "Install plugin..." and choose fdm-bolt-nut-designer.zip.
   4. Click Install.
 
-Four new buttons appear on the ribbon in the "Plugins" group: FDM Hex Bolt,
-FDM Socket Bolt, FDM Phillips Bolt and FDM Slotted Bolt. They're also in the
-Plugins menu. All four have the same plug icon, because SolidCraft
-doesn't let plugins choose their own icons yet.
+Five new buttons appear on the ribbon in the "Plugins" group: FDM Hex
+Bolt, FDM Socket Bolt, FDM Phillips Bolt, FDM Slotted Bolt and FDM Nut.
+They're also in the Plugins menu. All five have the same plug icon,
+because SolidCraft doesn't let plugins choose their own icons yet.
 
-To update from an earlier version: in Preferences > Plugins, click Remove on
-"FDM Bolt Designer", then install the new zip.
+Upgrading from FDM Bolt Designer (version 1.x): the plugin has a new
+name, so first click Remove on "FDM Bolt Designer" in Preferences >
+Plugins, then install fdm-bolt-nut-designer.zip. Otherwise SolidCraft
+keeps both. Settings remembered in your designs carry over.
+
+To update to a newer version of FDM Bolt & Nut Designer later: click
+Remove on "FDM Bolt & Nut Designer", then install the new zip.
 
 
 HOW TO USE IT
@@ -176,6 +179,43 @@ Things to know:
     the FDM 90° Threads guide for printer settings.
 
 
+FDM NUT
+-------
+Click FDM Nut. Like the bolt buttons, it needs nothing selected. The
+nut lies flat on the floor of the design (with Axis Z), ready to print.
+
+  Size, Pitch   The thread, as for bolts.
+
+  Tolerance (clearance)
+                The printing clearance. Use the same one as the bolt
+                that goes in it.
+
+  Thickness     How tall the nut is. Leave empty for the standard
+                (ISO 4032) height, for example 8.4 mm for M10.
+
+  Width across flats
+                The wrench size. Leave empty for the standard size,
+                for example 16 mm for M10.
+
+  Chamfer inner A 45° countersink where the bolt threads in, on both
+                faces, so the bolt starts easily from either side:
+                  "auto"   - as deep as the thread (the default)
+                  "custom" - the size in Chamfer inner size
+                  "none"   - no countersink
+
+  Chamfer outer A 45° bevel on the hex corners, on both faces:
+                  "none"   - flat faces right out to the corners, the
+                             best first layer for printing (the default)
+                  "auto"   - like a standard nut's bevel
+                  "custom" - the size in Chamfer outer size: how far
+                             the bevel cuts in from the corners
+
+  Hand, Axis, Base X / Y / Z, Body name, Remember Settings
+                As for bolts. The nut's steps go into one timeline
+                folder named after it, for example
+                "FDM90-10x2 0.100e nut".
+
+
 IF SOMETHING GOES WRONG
 -----------------------
   "... must be at least N mm across flats" / "... at least N mm across"
@@ -196,20 +236,31 @@ IF SOMETHING GOES WRONG
       through the side of a countersunk head. Make it shallower, or
       leave it empty.
 
+  "a nut ... needs at least N mm across flats"
+      The nut is too narrow to keep a wall around the thread. Make
+      Width across flats bigger, or leave it empty.
+
+  "the countersinks on the two faces would meet" / "the outer
+  chamfers on the two faces would meet" / "... would cut into the
+  thread" / "... reaches past the flats"
+      A custom nut chamfer is too big for the nut. Make it smaller,
+      use "auto", or make the nut thicker.
+
   "... has no N mm pitch; choose ..."
   "... goes up to a N mm clearance"
       As in FDM 90° Threads: pick one of the listed pitches, or a
       smaller clearance.
 
 
-THE SOURCE CODE (fdm-bolt-designer-source.zip)
-----------------------------------------------
+THE SOURCE CODE (fdm-bolt-nut-designer-source.zip)
+--------------------------------------------------
 You only need this to read or change how the plugin works. Like
 FDM 90° Threads, it's a small C program compiled to WebAssembly that
 sends SolidCraft the same commands you could run yourself. Its thread
-code is copied unchanged from FDM 90° Threads 1.5.2.
+code is copied unchanged from FDM 90° Threads (and its timeline
+folders from version 1.6.0).
 
 To rebuild: ./build.sh. It needs clang (with WebAssembly support),
 wasm-ld and python3; README.md has the details and a list of the files,
 including the tests, which run the plugin against a pretend SolidCraft
-and draw the bolt it would build.
+and draw the bolt or nut it would build.
