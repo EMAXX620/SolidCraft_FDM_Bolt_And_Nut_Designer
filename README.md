@@ -6,6 +6,8 @@ FDM BOLT DESIGNER PLUGIN FOR SOLIDCRAFT
 Version 1.4.0
 ======================================================================
 
+<img width="886" height="763" alt="image" src="https://github.com/user-attachments/assets/9c2964e3-3c74-4d17-b3a5-92324e0dc3ef" />
+
 
 WHAT IT IS
 ----------
