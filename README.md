@@ -1,8 +1,10 @@
 FDM BOLT & NUT DESIGNER PLUGIN FOR SOLIDCRAFT
-Version 2.0.0
+Version 2.4.0
 ======================================================================
 
 <img width="1072" height="771" alt="image" src="https://github.com/user-attachments/assets/0153cea3-e4ba-47f8-b507-4a2e8757f7bd" />
+<img width="705" height="465" alt="image" src="https://github.com/user-attachments/assets/dfcf7fc9-9e01-4053-ba40-a196cbc108db" />
+
 
 WHAT IT IS
 ----------
@@ -20,6 +22,8 @@ parts, ready to print:
       FDM Socket Bolt    - a round head with a hex key hole, like a socket
                        head cap screw
       FDM Phillips Bolt  - a round head with a Phillips cross (#0 to #4)
+      FDM Torx Bolt      - a round head with a Torx (star) recess, or an
+                           E-Torx head for an E socket
       FDM Slotted Bolt   - a round head with a slot for a flat screwdriver
     Each button's window only shows the settings for that head.
     (For a plain threaded rod, use FDM Rod in FDM 90° Threads.)
@@ -47,10 +51,15 @@ HOW TO INSTALL
   3. Click "Install plugin..." and choose fdm-bolt-nut-designer.zip.
   4. Click Install.
 
-Five new buttons appear on the ribbon in the "Plugins" group: FDM Hex
-Bolt, FDM Socket Bolt, FDM Phillips Bolt, FDM Slotted Bolt and FDM Nut.
-They're also in the Plugins menu. All five have the same plug icon,
-because SolidCraft doesn't let plugins choose their own icons yet.
+Six new buttons appear on the ribbon in the "Plugins" group: FDM Hex
+Bolt, FDM Socket Bolt, FDM Phillips Bolt, FDM Torx Bolt, FDM Slotted
+Bolt and FDM Nut. They're also in the Plugins menu. All six have the
+same plug icon, because SolidCraft doesn't let plugins choose their
+own icons yet.
+
+The settings windows don't show explanations when you hover over a
+setting; this guide explains each one. (SolidCraft limits how big a
+plugin's settings can be, and six windows only fit without them.)
 
 Upgrading from FDM Bolt Designer (version 1.x): the plugin has a new
 name, so first click Remove on "FDM Bolt Designer" in Preferences >
@@ -70,19 +79,19 @@ select anything first.
   Remember Settings/Use Last Settings
                 Same as in FDM 90° Threads: tick it to reuse the
                 settings from the last bolt this button made in this
-                design. Each button remembers its own. Where the bolt
-                goes and its name are never reused.
+                design. Each button remembers its own.
 
 THE HEAD
 
-  Head shape    FDM Socket, Phillips and Slotted Bolt:
+  Head shape    FDM Socket, Phillips, Torx and Slotted Bolt
+                (not E-TORX):
                   "cylinder"    - a flat-topped round head
                   "countersunk" - a 90° cone, for countersunk holes
 
   Head size (across flats)   (FDM Hex Bolt)
                 The wrench size, for example 13 for a 13 mm wrench.
-  Head diameter (FDM Socket, Phillips and Slotted Bolt)
-                The round head's diameter.
+  Head diameter (FDM Socket, Phillips, Torx and Slotted Bolt)
+                The round head's diameter. (For E-TORX, see below.)
                 Leave empty for the standard size.
 
   Head thickness
@@ -122,6 +131,33 @@ THE DRIVE (each round-head button shows its own)
                 Tick it to run the slot right across the head, like
                 a classic slotted screw.
 
+  Style   (FDM Torx Bolt)
+                  "TORX"   - a round head with a Torx (star) recess for
+                             a T bit (the default)
+                  "E-TORX" - the head itself is an external Torx
+                             shape, for an E socket
+
+  Torx size   (FDM Torx Bolt)
+                "auto", or a size from the list. Sizes that go
+                together are listed in pairs, such as "T25 / E5": the
+                E5 socket fits the same shape as a T25 bit. TORX uses
+                the T size, E-TORX the E size. T27, T45 and T90 are
+                TORX only, and E14 is E-TORX only. (There's no E25:
+                for a T25-size shape, the E size is E5.)
+                "auto" for TORX picks the biggest T size that suits
+                the Head diameter (for example T50 on an M10 socket
+                head). "auto" for E-TORX uses the Head diameter if you
+                give one (the biggest E size that fits within it),
+                otherwise the usual E size for the thread (for
+                example E10 for M8, E12 for M10). E24 is the biggest
+                E size, which suits threads up to about M24.
+                An E-TORX head is never countersunk, and is as tall as
+                a hex head unless you set Head thickness.
+                The Torx shape is made of real curved faces (each lobe
+                and valley is a true cylinder), so it looks smooth in
+                SolidCraft and prints smooth. It uses one sketch and
+                about 13 steps, all in the bolt's timeline folder.
+
   Drive depth   How deep the socket, cross or slot goes. Leave empty
                 for a sensible depth.
 
@@ -156,14 +192,12 @@ THE THREAD
 
 WHERE IT GOES
 
-  Axis, Base X / Y / Z
-                The bolt starts at the base point with its head and
-                points along the axis. With Z (the default) it stands
-                head-down on the floor of the design, the way you'd
-                usually print it.
-
-  Body name     Optional. Otherwise it's named after the bolt, for
-                example "FDM90-10x2 x 25 socket bolt".
+  Axis          The bolt starts at the origin of the design with its
+                head and points along the axis. With Z (the default)
+                it stands head-down on the floor of the design, the
+                way you'd usually print it. It's named after the bolt,
+                for example "FDM90-10x2 x 25 socket bolt". Move or
+                rename it afterwards if you need to.
 
 Things to know:
   - The bolt is made from ordinary SolidCraft steps (a cylinder,
@@ -172,6 +206,14 @@ Things to know:
     "FDM90-10x2 x 20 socket bolt"), closed at first; click it to see
     the steps. Suppressing or deleting the folder does the same to the
     whole bolt. Undo removes all of it in one go.
+  - Its sketches go into one group in the browser's Sketches folder,
+    with the same name as the timeline folder. If SolidCraft won't
+    make the group, the sketches stay where they are and a note says
+    so; the bolt is made either way.
+  - Its sketches are hidden when it's done, so you see just the part:
+    the sketch group's eye in the browser is turned off. Only that
+    bolt's or nut's sketches are hidden; click the group's eye to show
+    them again.
   - The plugin doesn't update the bolt if you change something later.
     Delete its steps from the timeline and run it again.
   - Small threads (3 to 5 mm) are at the limit of FDM printing; see
@@ -209,7 +251,7 @@ nut lies flat on the floor of the design (with Axis Z), ready to print.
                   "custom" - the size in Chamfer outer size: how far
                              the bevel cuts in from the corners
 
-  Hand, Axis, Base X / Y / Z, Body name, Remember Settings
+  Hand, Axis, Remember Settings
                 As for bolts. The nut's steps go into one timeline
                 folder named after it, for example
                 "FDM90-10x2 0.100e nut".
@@ -229,6 +271,16 @@ IF SOMETHING GOES WRONG
       The hex key, Phillips size or slot you chose is too big for the
       head. Choose a smaller one, use "auto", or make the head bigger.
       For a slot, ticking Full-width slot also works.
+
+  "... is an E-TORX size only" / "... is a T (recess) size only"
+      The Torx size you picked isn't in the series the Style uses.
+      Pick a pair (like "T25 / E5"), or change the Style.
+
+  "an E.. head is too small for a N mm thread"
+  "E-TORX sizes go up to E24 ..."
+      The E-Torx head would be narrower than the thread allows.
+      Choose a bigger E size or "auto", or for big threads use
+      FDM Hex Bolt or Style TORX.
 
   "... goes too far for this head"
       The Drive depth would leave too thin a floor, or break out
@@ -263,3 +315,4 @@ To rebuild: ./build.sh. It needs clang (with WebAssembly support),
 wasm-ld and python3; README.md has the details and a list of the files,
 including the tests, which run the plugin against a pretend SolidCraft
 and draw the bolt or nut it would build.
+
