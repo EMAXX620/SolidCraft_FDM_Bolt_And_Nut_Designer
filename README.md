@@ -1,10 +1,11 @@
 FDM BOLT & NUT DESIGNER PLUGIN FOR SOLIDCRAFT
-Version 2.4.0
+Version 2.4.3
 ======================================================================
 
 <img width="1072" height="771" alt="image" src="https://github.com/user-attachments/assets/0153cea3-e4ba-47f8-b507-4a2e8757f7bd" />
 <img width="705" height="465" alt="image" src="https://github.com/user-attachments/assets/dfcf7fc9-9e01-4053-ba40-a196cbc108db" />
 
+2.4.3 has fixes for SolidCraft 0.45.0
 
 WHAT IT IS
 ----------
